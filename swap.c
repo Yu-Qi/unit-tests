@@ -10,41 +10,46 @@ typedef struct List_node List;
 
 List *swap(List *head, List *node_1, List *node_2)
 {
-    if (!head &&
-        (node_1 == NULL) && (node_2 == NULL) &&
+     
+    if (!head ||
+        (node_1 == NULL) || (node_2 == NULL) ||
         (node_1 == node_2))
         return head;
 
-    int num_pre_node_1_and_node_2 = 0;
 
     List *_head = head;
     List *pre_node_1,*pre_node_2,*tmp_node;
+    int num_pre_node_1_and_node_2 = 0;
 
-    while (head && head->next) {
+
+    if (head == node_1) {
+        pre_node_1 = NULL;
+        num_pre_node_1_and_node_2 ++;
+    }
+    else if (head == node_2) {
+        pre_node_2 = NULL;
+        num_pre_node_1_and_node_2 ++;
+    }    
+        while (head && head->next) {
         if (head->next == node_1) {
             pre_node_1 = head;
-            num_pre_node_1_and_node_2 = num_pre_node_1_and_node_2 + 1;
+            num_pre_node_1_and_node_2 ++;
+            if(num_pre_node_1_and_node_2==2)
+                goto end;
         }
-
-        if (head->next == node_2) {
+        else if (head->next == node_2) {
             pre_node_2 = head;
-            num_pre_node_1_and_node_2 = num_pre_node_1_and_node_2 + 1;
+            num_pre_node_1_and_node_2 ++;
+            if(num_pre_node_1_and_node_2==2)
+                goto end;
         }
         head = head->next;
     }
-
+end:
     head = _head;
-    if (head == node_1) {
-        pre_node_1 = NULL;
-        num_pre_node_1_and_node_2 = num_pre_node_1_and_node_2 + 1;
-    }
-
-    if (head == node_2) {
-        pre_node_2 = NULL;
-        num_pre_node_1_and_node_2 = num_pre_node_1_and_node_2 + 1;
-    }
-
-    if (num_pre_node_1_and_node_2 != 2)
+    
+    // ==2 is normal,meaning the two nodes can be found in the linked list
+    if( num_pre_node_1_and_node_2 != 2 )
         return head;
 
     if (pre_node_1 == NULL) {
@@ -85,4 +90,5 @@ List *swap(List *head, List *node_1, List *node_2)
     pre_node_2->next = node_1;
     node_1->next = tmp_node;
     return head;
+
 }

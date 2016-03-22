@@ -23,7 +23,7 @@ void bubble_sort(List **head)
         sub_for_Max = num_list - i;
         pre_sub_head = head;
         int have_swap= 0 ; //equal false
-        for (int sub_i = 0; sub_head && sub_head->next && (sub_i < sub_for_Max) ; sub_i++ ){
+        for (int sub_i = 0; sub_i < sub_for_Max ; sub_i++ ){
             if (sub_head->value < sub_head->next->value) {  //for decreasing order
                 sub_head = swap(sub_head,sub_head,sub_head->next);
                 *pre_sub_head = sub_head;

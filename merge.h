@@ -2,7 +2,7 @@
 #define MERGE_H
 
 typedef struct List_node {
-    int val;
+    int value;
     struct List_node *next;
 } List_node;
 typedef struct List_node List;

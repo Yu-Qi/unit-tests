@@ -17,7 +17,7 @@ List* combine(List **result, List *_left, List *_right)
 	else if( ! _left)
 		return _right;
 	// sorting it by decreasing order 
-	if(_left -> val < _right -> val){
+	if(_left -> value < _right -> value){
 		set_node_and_recursive(right, left);
 		(*result) -> next = combine( &((*result)->next), _left , _right -> next);
 	}

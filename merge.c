@@ -2,15 +2,6 @@
 #include "stdlib.h"
 #include "merge.h"
 
-#define push( NAME) {	 				\
-	List  *t = (List *) malloc( sizeof( List)); 		\
-	t-> val = list_##NAME -> val;  			\
-	t -> next = (*result); 				\
-	(*result) = t; 					\
-	ith_##NAME ++; 				\
-	list_##NAME = list_##NAME -> next;		 \
-}
-
 #define set_node_and_recursive(NAME1,NAME2) { 	\
 		(*result) = _##NAME1 ;			\
 		if( ! _##NAME1->next){			\
@@ -18,7 +9,6 @@
 			return *result;			\
 		}					\
 }
-
 	
 List* combine(List **result, List *_left, List *_right)
 {
@@ -26,7 +16,8 @@ List* combine(List **result, List *_left, List *_right)
 		return _left;
 	else if( ! _left)
 		return _right;
-	if(_left -> val > _right -> val){
+	// sorting it by decreasing order 
+	if(_left -> val < _right -> val){
 		set_node_and_recursive(right, left);
 		(*result) -> next = combine( &((*result)->next), _left , _right -> next);
 	}
